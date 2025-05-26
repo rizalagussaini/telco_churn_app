@@ -3,7 +3,7 @@
     "activeCommit": 0,
     "commits": [
         {
-            "activePatchIndex": 1,
+            "activePatchIndex": 2,
             "patches": [
                 {
                     "date": 1748222103836,
@@ -12,6 +12,10 @@
                 {
                     "date": 1748223503428,
                     "content": "Index: \n===================================================================\n--- \n+++ \n@@ -137,9 +137,9 @@\n # One-hot encoding\r\n input_encoded = pd.get_dummies(input_df)\r\n \r\n # Pastikan semua fitur sesuai dengan yang digunakan saat pelatihan model\r\n-model_features = model.get_booster().feature_names\r\n+model_features = model.feature_names_\r\n for col in set(model_features) - set(input_encoded.columns):\r\n     input_encoded[col] = 0\r\n input_encoded = input_encoded[model_features]\r\n \r\n"
+                },
+                {
+                    "date": 1748223763172,
+                    "content": "Index: \n===================================================================\n--- \n+++ \n@@ -7,9 +7,9 @@\n \r\n st.title(\"📊 Prediksi Pelanggan Berhenti Berlangganan (Churn) Telco\")\r\n \r\n st.markdown(\"\"\"\r\n-Aplikasi ini menggunakan model  untuk memprediksi apakah pelanggan akan **berhenti berlangganan (churn)** dari layanan Telco berdasarkan data langganan.\r\n+Aplikasi ini menggunakan model CatBoost untuk memprediksi apakah pelanggan akan **berhenti berlangganan (churn)** dari layanan Telco berdasarkan data langganan.\r\n Silakan isi formulir di samping untuk melihat hasil prediksi. 👇\r\n \"\"\")\r\n \r\n st.sidebar.header(\"📝 Isi Data Pelanggan\")\r\n"
                 }
             ],
             "date": 1748222103836,

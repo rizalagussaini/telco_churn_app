@@ -8,7 +8,7 @@ model = joblib.load('catboost_model.pkl')
 st.title("📊 Prediksi Pelanggan Berhenti Berlangganan (Churn) Telco")
 
 st.markdown("""
-Aplikasi ini digunakan untuk memprediksi apakah pelanggan akan **berhenti berlangganan (churn)** dari layanan Telco berdasarkan data langganan.
+Aplikasi ini menggunakan model CatBoost untuk memprediksi apakah pelanggan akan **berhenti berlangganan (churn)** dari layanan Telco berdasarkan data langganan.
 Silakan isi formulir di samping untuk melihat hasil prediksi. 👇
 """)
 
