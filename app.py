@@ -138,7 +138,7 @@ input_df = user_input()
 input_encoded = pd.get_dummies(input_df)
 
 # Pastikan semua fitur sesuai dengan yang digunakan saat pelatihan model
-model_features = model.get_booster().feature_names
+model_features = model.feature_names_
 for col in set(model_features) - set(input_encoded.columns):
     input_encoded[col] = 0
 input_encoded = input_encoded[model_features]
