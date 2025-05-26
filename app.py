@@ -3,7 +3,7 @@ import pandas as pd
 import joblib
 
 # Load model
-model = joblib.load('model.pkl')
+model = joblib.load('catboost_model.pkl')
 
 st.title("📊 Prediksi Pelanggan Berhenti Berlangganan (Churn) Telco")
 
