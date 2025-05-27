@@ -3,12 +3,12 @@ import pandas as pd
 import joblib
 
 # Load model
-model = joblib.load('catboost_model.pkl')
+model = joblib.load('xgboost_model.pkl')
 
 st.title("📊 Prediksi Pelanggan Berhenti Berlangganan (Churn) Telco")
 
 st.markdown("""
-Aplikasi ini menggunakan model CatBoost untuk memprediksi apakah pelanggan akan **berhenti berlangganan (churn)** dari layanan Telco berdasarkan data langganan.
+Aplikasi ini menggunakan model **XGBoost** untuk memprediksi apakah pelanggan akan **berhenti berlangganan (churn)** dari layanan Telco berdasarkan data langganan.
 Silakan isi formulir di samping untuk melihat hasil prediksi. 👇
 """)
 
@@ -85,9 +85,6 @@ def user_input():
     st.sidebar.markdown(f"**➡️ Total Biaya:** Rp {total_rp:,.0f}".replace(",", "."))
     st.sidebar.caption("💡 Biaya dikonversi otomatis ke USD dengan kurs Rp16.000 per USD untuk keperluan model.")
 
-    
-
-
     # Validasi sederhana
     if total_rp < monthly_rp:
         st.sidebar.warning("⚠️ Total biaya tidak boleh lebih kecil dari biaya bulanan.")
@@ -136,12 +133,17 @@ input_df = user_input()
 
 # One-hot encoding
 input_encoded = pd.get_dummies(input_df)
+#input_data_for_predict = input_df
 
 # Pastikan semua fitur sesuai dengan yang digunakan saat pelatihan model
-model_features = model.feature_names_
-for col in set(model_features) - set(input_encoded.columns):
-    input_encoded[col] = 0
+model_features = model.get_booster().feature_names
+for col in model_features:
+    if col not in input_encoded.columns:
+        input_encoded[col] = 0
 input_encoded = input_encoded[model_features]
+
+# Jika ingin pastikan kolom sama persis dengan yang model pakai:
+
 
 # Tombol prediksi
 if st.button("🔍 Prediksi Sekarang"):
